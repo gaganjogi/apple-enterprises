@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+<style>
+.a{fill:#10212e}
+.c{fill:#0b6a8a;stroke:#eef2f5;stroke-width:1.5;stroke-linejoin:round}
+.t{fill:none;stroke:#0b6a8a;stroke-width:2.5;stroke-linecap:round}
+@media (prefers-color-scheme: dark){
+.a{fill:#e6eef3}
+.c{fill:#5cc3e6;stroke:#0d171e}
+.t{stroke:#5cc3e6}
+}
+</style>
+<path class="a" d="M20 12 36 38h-8.5L20 24 12.5 38H4Z"/><path class="c" d="M20 2 37 9 20 16 3 9Z"/><path class="t" d="M32.5 11.5v7"/>
+</svg>

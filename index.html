@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apple Enterprises</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="description" content="Apple Enterprises, Mandya. Water level controllers, motor starters and relays, plus mentor-led placement programs and technical courses.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one sticky header with a two-way switch (Apple Enterprises | Placement); each side is a full single-column site, spec-plate cards for products, plain stacked sections for programs. */
+:root{
+  --bg:#eef2f5; --surface:#ffffff; --ink:#10212e; --muted:#51636f; --line:#cfd9e0;
+  --water:#0b6a8a; --amber:#9a5200; --on-accent:#ffffff;
+  --accent:var(--water);
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d171e; --surface:#15232d; --ink:#e6eef3; --muted:#9db0bc; --line:#2a3c48;
+    --water:#5cc3e6; --amber:#f0aa4a; --on-accent:#0d171e; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d171e; --surface:#15232d; --ink:#e6eef3; --muted:#9db0bc; --line:#2a3c48;
+  --water:#5cc3e6; --amber:#f0aa4a; --on-accent:#0d171e; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body[data-view="placement"]{--accent:var(--amber)}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance}
+h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:700;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--accent)}
+h2{font-size:clamp(1.5rem,4vw,2.1rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.15rem;font-weight:500}
+p{margin:0;max-width:62ch}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{font-family:var(--display);font-weight:700;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+.mark{width:30px;height:30px;border-radius:6px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:.85rem;letter-spacing:.02em}
+.logo{width:34px;height:34px;flex:none}
+.logo .a{fill:var(--ink)}
+.logo .c{fill:var(--accent);stroke:var(--bg);stroke-width:1.5;stroke-linejoin:round}
+.logo .t{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round}
+.word{letter-spacing:-.01em}
+.word b{font-weight:700;color:var(--accent)}
+.switch{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface);gap:3px}
+.switch button{font:500 .92rem var(--body);color:var(--muted);background:transparent;border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
+.switch button[aria-selected="true"]{background:var(--accent);color:var(--on-accent)}
+.subnav{display:flex;flex-wrap:wrap;gap:4px 18px;padding-block:10px 0}
+.subnav button{font:500 .9rem var(--body);color:var(--muted);background:none;border:0;padding:4px 0;cursor:pointer}
+.subnav button:hover{color:var(--accent)}
+
+/* sections */
+main{display:flex;flex-direction:column;gap:64px;padding-block:28px 72px}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:120px}
+.hero{gap:18px;padding-block:28px 0}
+.hero p{font-size:1.1rem;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.btn{font:600 .95rem var(--body);display:inline-block;text-decoration:none;border-radius:8px;padding:11px 18px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.grid>*{min-width:0}
+
+/* product spec plates */
+.plate{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.plate .cat{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.price{font-family:var(--mono);font-weight:500;font-size:1.05rem;color:var(--accent);font-variant-numeric:tabular-nums}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.9rem}
+dt{color:var(--muted)}
+dd{margin:0;font-family:var(--mono);font-size:.85rem;text-align:right;overflow-wrap:anywhere}
+.plate .btn{margin-top:auto;align-self:flex-start;padding:8px 14px;font-size:.88rem}
+
+/* plain items */
+.item{display:flex;flex-direction:column;gap:8px;border-top:2px solid var(--accent);padding-top:14px}
+.item p{color:var(--muted);font-size:.97rem}
+.feature{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:3px 10px}
+.steps{counter-reset:s}
+.steps .item{counter-increment:s}
+.steps .item h3::before{content:counter(s) ". ";color:var(--accent);font-family:var(--mono)}
+
+/* contact */
+.kv{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.kv li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 16px;padding-block:10px;border-bottom:1px solid var(--line)}
+.kv span:first-child{color:var(--muted);font-size:.9rem}
+.kv b{font-weight:500;user-select:all;overflow-wrap:anywhere}
+.copy{font:500 .78rem var(--mono);background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:2px 8px;cursor:pointer;margin-left:8px}
+
+.policy main{gap:26px;max-width:72ch}
+.policy section{gap:8px}
+.policy h2{font-size:1.2rem}
+.policy ul{margin:0;padding-left:20px}
+.policy li{margin-block:4px}
+.policy .back{align-self:flex-start;padding:7px 14px;font-size:.88rem}
+footer{border-top:1px solid var(--line);padding-block:28px 40px;font-size:.9rem;color:var(--muted)}
+footer .wrap{display:flex;flex-direction:column;gap:12px}
+footer .row{gap:6px 20px}
+@media (max-width:520px){
+  .switch{width:100%}
+  .switch button{flex:1;padding-inline:8px}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+</head>
+<body data-view="products" style="margin:0">
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><path class="a" d="M20 12 36 38h-8.5L20 24 12.5 38H4Z"/><path class="c" d="M20 2 37 9 20 16 3 9Z"/><path class="t" d="M32.5 11.5v7"/></svg><span class="word" aria-label="Apple Enterprises">apple <b>enterprises</b></span></div>
+    <div class="switch" role="tablist" aria-label="Choose a section of Apple Enterprises">
+      <button role="tab" id="tab-products" aria-controls="view-products" aria-selected="true" data-view="products">Apple Enterprises</button>
+      <button role="tab" id="tab-placement" aria-controls="view-placement" aria-selected="false" data-view="placement">Placement</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ VIEW 1: APPLE ENTERPRISES (products) ============ -->
+<div id="view-products" role="tabpanel" aria-labelledby="tab-products">
+  <div class="wrap">
+    <nav class="subnav" aria-label="Products sections">
+      <button data-go="p-products">What we do</button>
+      <button data-go="p-about">About</button>
+      <button data-go="p-contact">Contact us</button>
+    </nav>
+    <main>
+      <section class="hero">
+        <span class="eyebrow">Mandya, Karnataka</span>
+        <h1>Water level controllers and motor starters <em>for pumps that run themselves</em>.</h1>
+        <p>Apple Enterprises is a retailer of water level controllers, ignition coils and motor starters, based in Mandya, Karnataka.</p>
+        <div class="row">
+          <button class="btn" data-go="p-products">What we do</button>
+          <button class="btn ghost" data-go="p-contact">Contact us</button>
+        </div>
+      </section>
+
+      <section id="p-products">
+        <span class="eyebrow">What we do</span>
+        <h2>Controls that look after the pump and the motor</h2>
+        <p class="muted">We supply the control units that sit between the power line and a pump or motor. They switch the pump by water level, start the motor, and protect it when the supply goes wrong.</p>
+        <div class="grid">
+          <div class="item"><h3>Water level controllers</h3><p>Digital and automatic controllers that sense the water level in a tank and switch the pump on and off by themselves, so the tank fills without overflowing and nobody has to watch it.</p></div>
+          <div class="item"><h3>Motor starters</h3><p>Direct-on-line auto starters for three-phase motors from 1 HP to 20 HP. The unit starts the motor on its own when power is available.</p></div>
+          <div class="item"><h3>OLSP relays</h3><p>Overload and single-phase preventer relays. They cut off the motor when it is overloaded or when one phase of the supply fails, which protects the winding from burning out.</p></div>
+          <div class="item"><h3>Coils</h3><p>25 A coils with 415 VAC coil voltage, used in motor starter panels.</p></div>
+        </div>
+      </section>
+
+      <section id="p-about">
+        <span class="eyebrow">About</span>
+        <h2>About Apple Enterprises</h2>
+        <ul class="kv">
+          <li><span>Business name</span><b>Apple Enterprises</b></li>
+          <li><span>Owner</span><b>Madaiah Kantharaju</b></li>
+          <li><span>Nature of business</span><b>Retailer</b></li>
+          <li><span>Location</span><b>Mandya, Karnataka, India</b></li>
+          <li><span>GST</span><b>29BPSPK1276G1ZF</b></li>
+        </ul>
+      </section>
+
+      <section id="p-contact">
+        <span class="eyebrow">Contact us</span>
+        <h2>Talk to us</h2>
+        <p class="muted">Call or write to us with any question about our controllers, starters and relays.</p>
+        <ul class="kv">
+          <li><span>Phone</span><span><b>+91 90368 91260</b><button class="copy" data-copy="+919036891260">Copy</button></span></li>
+          <li><span>Email</span><span><b>darshansgowda111@gmail.com</b><button class="copy" data-copy="darshansgowda111@gmail.com">Copy</button></span></li>
+          <li><span>Address</span><b>Mandya, Karnataka</b></li>
+        </ul>
+        <div class="row">
+          <a class="btn" href="tel:+919036891260">Call us</a>
+          <a class="btn ghost" href="mailto:darshansgowda111@gmail.com">Email us</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ============ VIEW 2: PLACEMENT ============ -->
+<div id="view-placement" role="tabpanel" aria-labelledby="tab-placement" hidden>
+  <div class="wrap">
+    <nav class="subnav" aria-label="Placement sections">
+      <button data-go="offer">What we offer</button>
+      <button data-go="programs">Programs</button>
+      <button data-go="how">How it works</button>
+      <button data-go="contact">Contact us</button>
+    </nav>
+    <main>
+      <section class="hero">
+        <span class="eyebrow">Mentorship programs and courses</span>
+        <h1>Learn tech skills with a mentor <em>by your side</em>.</h1>
+        <p>Mentor-led programs and courses that take you from the basics to real projects, with practice and feedback at every step.</p>
+        <div class="row">
+          <button class="btn" data-go="programs">See the ongoing program</button>
+          <button class="btn ghost" data-go="contact">Contact us</button>
+        </div>
+        <div class="feature">
+          <span class="tag">Ongoing now</span>
+          <h3>Java Course</h3>
+          <p class="muted">Our Java course is running right now. Watch the overview to see how it works.</p>
+          <a class="btn ghost" href="https://www.youtube.com/watch?v=rHmSDiETEbo" target="_blank" rel="noopener">View course details</a>
+        </div>
+      </section>
+
+      <section id="offer">
+        <span class="eyebrow">What we offer</span>
+        <h2>Two ways to learn with Apple Enterprises</h2>
+        <p class="muted">Everything is delivered online, so you can join from wherever you are.</p>
+        <div class="grid">
+          <div class="item"><h3>Mentorship programs</h3><p>Learn with a mentor who reviews your work, answers your questions and keeps you moving at a steady pace.</p></div>
+          <div class="item"><h3>Technical courses</h3><p>Structured courses in programming and other technical subjects, taught step by step from the basics.</p></div>
+          <div class="item"><h3>Hands-on practice</h3><p>Exercises and projects are part of every program, so you learn by building and not only by watching.</p></div>
+        </div>
+      </section>
+
+      <section id="programs">
+        <span class="eyebrow">Programs</span>
+        <h2>What is running now</h2>
+        <div class="feature">
+          <span class="tag">Ongoing</span>
+          <h3>Java Course</h3>
+          <p class="muted">Our Java course is currently in progress. The video has the details of what it covers and how to join.</p>
+          <a class="btn" href="https://www.youtube.com/watch?v=rHmSDiETEbo" target="_blank" rel="noopener">Watch course details</a>
+        </div>
+        <p class="muted">We run several programs through the year. The Java course is the one open right now, and new programs will be added here.</p>
+      </section>
+
+      <section id="how">
+        <span class="eyebrow">How it works</span>
+        <h2>From sign up to your first session</h2>
+        <div class="grid steps">
+          <div class="item"><h3>Choose a program</h3><p>Pick the program that matches what you want to learn and read its details.</p></div>
+          <div class="item"><h3>Enrol and pay online</h3><p>Pay the program fee online. You receive a confirmation once the payment goes through.</p></div>
+          <div class="item"><h3>Start learning</h3><p>Access details are shared with you after enrolment, and you begin learning with your mentors.</p></div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <span class="eyebrow">Contact us</span>
+        <h2>Questions? Talk to us.</h2>
+        <p class="muted">Write to us or call for anything about programs, payments or refunds.</p>
+        <div class="grid">
+          <div>
+            <h3>Business details</h3>
+            <ul class="kv">
+              <li><span>Brand</span><b>Apple Enterprises</b></li>
+              <li><span>Legal name</span><b>MADAIAH KANTHARAJU</b></li>
+              <li><span>Business name</span><b>APPLE ENTERPRISES</b></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Get in touch</h3>
+            <ul class="kv">
+              <li><span>Email</span><span><b>darshansgowda111@gmail.com</b><button class="copy" data-copy="darshansgowda111@gmail.com">Copy</button></span></li>
+              <li><span>Phone</span><span><b>+91 90368 91260</b><button class="copy" data-copy="+919036891260">Copy</button></span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <a class="btn" href="tel:+919036891260">Call us</a>
+          <a class="btn ghost" href="mailto:darshansgowda111@gmail.com">Email us</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div id="view-terms" class="policy" hidden>
+  <div class="wrap">
+    <main>
+      <section class="hero">
+        <button class="btn ghost back" data-view="placement">Back to Placement</button>
+        <h1>Terms &amp; Conditions</h1>
+        <p class="muted">Last updated: 7 October 2026</p>
+      </section>
+      <section><h2>1. About these terms</h2><p>Apple Enterprises is an edtech business offering mentorship programs and technical courses online, operated by APPLE ENTERPRISES (legal name: MADAIAH KANTHARAJU). By visiting this website or enrolling in a program, you agree to these terms.</p></section>
+      <section><h2>2. Our services</h2><p>We provide online mentorship programs and technical courses. Each program has its own schedule, content and fee, which we share in the program details before you pay. Programs may change and are not always open for enrolment.</p></section>
+      <section><h2>3. Who can enrol</h2><p>You must be at least 18 years old to enrol. If you are under 18, a parent or legal guardian must enrol on your behalf and accept these terms.</p></section>
+      <section><h2>4. Enrolment and fees</h2><ul><li>Your enrolment is confirmed once we receive your payment and send you a confirmation.</li><li>All fees are in Indian Rupees (INR).</li><li>Payments are processed online through our payment partner, Cashfree Payments.</li><li>You must give accurate contact details so that we can share access information.</li></ul></section>
+      <section><h2>5. How programs are delivered</h2><p>All programs are delivered online. After enrolment, we share access details, such as session links or course material, by email or phone. No physical materials are shipped.</p></section>
+      <section><h2>6. Refunds and cancellations</h2><p>We offer a full refund, with no questions asked, if you ask for it within 2 days of the start of the program. Complete details are in the Refund Policy.</p></section>
+      <section><h2>7. Your responsibilities</h2><ul><li>Use the programs only for your personal learning. Do not share or resell access.</li><li>Treat mentors and other learners with respect.</li><li>Do not record, copy or redistribute session recordings, notes or other course material without our written permission.</li><li>Do not misuse the website.</li></ul><p>If you repeatedly break these rules, we may remove your access without a refund.</p></section>
+      <section><h2>8. Our content</h2><p>The course material, session content, logo, name and website design belong to Apple Enterprises or to the people who created them for us. You receive a personal, non-transferable right to use the materials while you are enrolled.</p></section>
+      <section><h2>9. No guarantee of results</h2><p>We provide quality teaching and mentorship, but results depend on your own effort. We do not guarantee any job, interview, placement, salary, certification or exam result.</p></section>
+      <section><h2>10. Changes to programs</h2><p>We may change schedules, mentors or formats when needed. We will tell you about material changes. If we cancel a program, you will get a full refund.</p></section>
+      <section><h2>11. Limit of liability</h2><p>Apple Enterprises is not liable for indirect or incidental losses arising from the use of the website or programs. Our liability is limited to the fees you paid for the relevant program, subject to your rights under Indian consumer law.</p></section>
+      <section><h2>12. Changes to these terms</h2><p>We may update these terms from time to time. The latest version will always be shown here with its date. If you continue to use the website or programs, you accept the changes.</p></section>
+      <section><h2>13. Governing law</h2><p>These terms are governed by Indian law. Disputes that we cannot resolve together go to the Indian courts of competent jurisdiction.</p></section>
+      <section><h2>14. Contact us</h2><ul><li>Business name: APPLE ENTERPRISES</li><li>Legal name: MADAIAH KANTHARAJU</li><li>Email: darshansgowda111@gmail.com</li><li>Phone: +91 90368 91260</li></ul></section>
+    </main>
+  </div>
+</div>
+
+<div id="view-refund" class="policy" hidden>
+  <div class="wrap">
+    <main>
+      <section class="hero">
+        <button class="btn ghost back" data-view="placement">Back to Placement</button>
+        <h1>Refund Policy</h1>
+        <p class="muted">Last updated: 7 October 2026</p>
+        <p>No questions asked, within 2 days.</p>
+        <p>If you ask for a refund within 2 days of the start of the program, you get a full refund. We will not ask you for a reason.</p>
+      </section>
+      <section><h2>1. Refund window</h2><p>You can cancel your enrolment and get a full refund of the program fee if you ask within 2 days of the start of the program. This applies to every Apple Enterprises mentorship program and course, and we do not ask you to explain why.</p><p>Once this 2 day window has passed, the fee is not refundable. Please use the window to decide whether the program suits you.</p></section>
+      <section><h2>2. How to ask for a refund</h2><ul><li>Email darshansgowda111@gmail.com or call +91 90368 91260 within the refund window.</li><li>Tell us your name, the program you enrolled in, and the phone number or email you used to pay. If you have the payment reference or transaction ID, please include it.</li><li>We will confirm your request by email or phone.</li></ul></section>
+      <section><h2>3. When you get your money back</h2><p>Approved refunds are sent back to the same payment method you used to pay, through our payment partner, Cashfree Payments. Refunds usually reach your account in 5 to 7 working days. The exact time depends on your bank or payment provider.</p></section>
+      <section><h2>4. Other cases where we refund</h2><ul><li>If we cancel a program: you get a full refund of the fee you paid for it.</li><li>Duplicate or failed payments: if you were charged more than once for the same program, or money was deducted but your enrolment was not confirmed, contact us and we will refund the extra or unconfirmed amount in full.</li></ul></section>
+      <section><h2>5. Cancelling your enrolment</h2><p>You can cancel at any time by contacting us. A cancellation made within the refund window comes with a full refund as described above. A cancellation made after the window ends the enrolment, but the fee is not refunded.</p></section>
+      <section><h2>6. Questions</h2><p>If anything here is unclear, or you are not happy with a refund decision, write to us and we will look into it.</p><ul><li>Business name: APPLE ENTERPRISES</li><li>Legal name: MADAIAH KANTHARAJU</li><li>Email: darshansgowda111@gmail.com</li><li>Phone: +91 90368 91260</li></ul></section>
+    </main>
+  </div>
+</div>
+
+<div id="view-privacy" class="policy" hidden>
+  <div class="wrap">
+    <main>
+      <section class="hero">
+        <button class="btn ghost back" data-view="placement">Back to Placement</button>
+        <h1>Privacy Policy</h1>
+        <p class="muted">Last updated: 7 October 2026</p>
+      </section>
+      <section><h2>1. Who we are</h2><p>Apple Enterprises is an edtech business offering mentorship programs and technical courses online. It is operated by APPLE ENTERPRISES (legal name: MADAIAH KANTHARAJU). This policy explains what personal information we collect and how we use it.</p></section>
+      <section><h2>2. What we collect</h2><ul><li>Your name, email address and phone number, which you give us when you enrol or contact us.</li><li>Details about the program you enrol in and your payment status.</li><li>Messages you send us, such as questions or refund requests.</li><li>Basic technical data, such as browser type and pages visited, if you use the website.</li></ul><p>We do not collect or store your card number, UPI PIN, net banking password or other payment credentials. Payments are handled by our payment partner, Cashfree Payments, under its own security and privacy practices.</p></section>
+      <section><h2>3. How we use it</h2><ul><li>To enrol you in a program and share access details and updates.</li><li>To confirm payments and process refunds.</li><li>To answer your questions and give support.</li><li>To improve our programs and website.</li><li>To meet legal and accounting requirements.</li></ul></section>
+      <section><h2>4. Who we share it with</h2><p>We do not sell your personal information. We share it only with:</p><ul><li>Our payment partner, so that your payment and any refund can be processed.</li><li>Mentors and service providers who need it to deliver your program, such as tools used to run online sessions.</li><li>Authorities, when the law requires us to.</li></ul></section>
+      <section><h2>5. How long we keep it</h2><p>We keep your information for as long as needed to provide the program, handle refunds and meet legal and accounting duties. After that we delete it or make it anonymous.</p></section>
+      <section><h2>6. Keeping it safe</h2><p>We take reasonable steps to protect your information from loss, misuse and unauthorised access. No online service can promise complete security, but we limit access to the people who need it.</p></section>
+      <section><h2>7. Your choices</h2><p>You can ask us to show you the personal information we hold about you, correct it, or delete it where the law allows. To do this, contact us using the details below.</p></section>
+      <section><h2>8. Changes to this policy</h2><p>We may update this policy from time to time. The latest version will always be on this page with its updated date.</p></section>
+      <section><h2>9. Contact us</h2><ul><li>Business name: APPLE ENTERPRISES</li><li>Legal name: MADAIAH KANTHARAJU</li><li>Email: darshansgowda111@gmail.com</li><li>Phone: +91 90368 91260</li></ul></section>
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><path class="a" d="M20 12 36 38h-8.5L20 24 12.5 38H4Z"/><path class="c" d="M20 2 37 9 20 16 3 9Z"/><path class="t" d="M32.5 11.5v7"/></svg><span class="word" aria-label="Apple Enterprises">apple <b>enterprises</b></span></div>
+    <p id="foot-line">Water level controllers, ignition coils and motor starters from Mandya, Karnataka.</p>
+    <div class="row">
+      <a href="#terms" data-view="terms">Terms &amp; Conditions</a>
+      <a href="#refund" data-view="refund">Refund Policy</a>
+      <a href="#privacy" data-view="privacy">Privacy Policy</a>
+    </div>
+    <p>© 2026 Apple Enterprises. Operated by APPLE ENTERPRISES (MADAIAH KANTHARAJU). All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var views={};['products','placement','terms','refund','privacy'].forEach(function(k){views[k]=document.getElementById('view-'+k);});
+  var tabs=document.querySelectorAll('.switch button');
+  var foot=document.getElementById('foot-line');
+  var lines={
+    products:'Water level controllers, ignition coils and motor starters from Mandya, Karnataka.',
+    placement:'Mentorship programs and technical courses for learners who want to build real skills.'
+  };
+  function show(name,keepScroll){
+    if(!views[name]) name='products';
+    Object.keys(views).forEach(function(k){views[k].hidden=(k!==name);});
+    tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.view===name));});
+    document.body.dataset.view=(name==='products'?'products':'placement');
+    foot.textContent=lines[name]||lines.placement;
+    try{history.replaceState(null,'','#'+name);}catch(e){}
+    if(!keepScroll) window.scrollTo(0,0);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.view);});});
+  document.addEventListener('click',function(e){
+    var v=e.target.closest('a[data-view],.back');
+    if(v){e.preventDefault();show(v.dataset.view);return;}
+    var go=e.target.closest('[data-go]');
+    if(go){var el=document.getElementById(go.dataset.go);if(el)el.scrollIntoView({block:'start'});return;}
+    var c=e.target.closest('[data-copy]');
+    if(c){
+      var done=function(){c.textContent='Copied';setTimeout(function(){c.textContent='Copy';},1500);};
+      try{navigator.clipboard.writeText(c.dataset.copy).then(done,function(){});}catch(err){}
+    }
+  });
+  function fromHash(){
+    var h=(location.hash||'').slice(1);
+    if(views[h]){show(h,true);return;}
+    // old PlaceMate links such as #contact or #programs open the Placement side
+    if(['offer','programs','how','contact'].indexOf(h)>-1){
+      show('placement',true);
+      var el=document.getElementById(h);if(el)el.scrollIntoView();
+      return;
+    }
+    show('products',true);
+  }
+  window.addEventListener('hashchange',fromHash);
+  fromHash();
+})();
+</script>
+</body>
+</html>
